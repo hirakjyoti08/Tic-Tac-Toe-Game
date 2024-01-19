@@ -110,9 +110,31 @@ class _GameScreenState extends State<GameScreen> {
             ),
             Expanded(
               flex: 2,
-              child: Text(
-                resultDec,
-                style: customFontWhite,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      resultDec,
+                      style: customFontWhite,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 32, vertical: 16)),
+                        onPressed: () {
+                          _clearBoard();
+                        },
+                        child: Text(
+                          'Play Again!',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ))
+                  ],
+                ),
               ),
             ),
           ],
@@ -217,7 +239,7 @@ class _GameScreenState extends State<GameScreen> {
       });
     }
 
-    if ( !winnerFound && filledBoxed == 9) {
+    if (!winnerFound && filledBoxed == 9) {
       setState(() {
         resultDec = 'Nobody Wins XD !';
       });
@@ -231,5 +253,15 @@ class _GameScreenState extends State<GameScreen> {
       xScore++;
     }
     winnerFound = true;
+  }
+
+  void _clearBoard() {
+    setState(() {
+      for (int i = 0; i < 9; i++) {
+        displayXO[i] = '';
+      }
+      resultDec = '';
+    });
+    filledBoxed = 0;
   }
 }

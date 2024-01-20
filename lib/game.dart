@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
 import 'constants/colors.dart';
 import 'package:tic_tac_toe/main.dart';
@@ -13,12 +14,16 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   bool oTurn = true;
   List<String> displayXO = ['', '', '', '', '', '', '', '', ''];
-
+  
   int oScore = 0;
   int xScore = 0;
   int filledBoxed = 0;
   String resultDec = '';
   bool winnerFound = false;
+
+  static const maxSec = 30;
+  int sec = maxSec;
+  Timer? timer;
 
   static var customFontWhite = GoogleFonts.salsa(
       textStyle: TextStyle(
@@ -26,6 +31,27 @@ class _GameScreenState extends State<GameScreen> {
     letterSpacing: 3,
     fontSize: 28,
   ));
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      setState(() {
+        if (sec > 0) {
+          sec--;
+        } else {
+          stopTimer();
+        }
+      });
+    });
+  }
+
+  void stopTimer() {
+    resetTimer();
+    timer?.cancel();
+  }
+
+  void resetTimer() {
+    sec = maxSec;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,18 +147,7 @@ class _GameScreenState extends State<GameScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 32, vertical: 16)),
-                        onPressed: () {
-                          _clearBoard();
-                        },
-                        child: Text(
-                          'Play Again!',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
-                        ))
+                    _buildTimer()
                   ],
                 ),
               ),
@@ -144,6 +159,9 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _tapped(int index) {
+    final isRunning = timer == null ? false : timer!.isActive;
+
+    if(isRunning) {
     setState(() {
       if (oTurn && displayXO[index] == '') {
         displayXO[index] = '0';
@@ -156,6 +174,7 @@ class _GameScreenState extends State<GameScreen> {
       oTurn = !oTurn;
       _checkWinner();
     });
+    }
   }
 
   void _checkWinner() {
@@ -263,5 +282,48 @@ class _GameScreenState extends State<GameScreen> {
       resultDec = '';
     });
     filledBoxed = 0;
+  }
+
+  Widget _buildTimer() {
+    final isRunning = timer == null ? false : timer!.isActive;
+
+    return isRunning 
+      ? SizedBox(
+        width: 100,
+        height: 100,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CircularProgressIndicator(
+              value: 1 - sec/maxSec,
+              valueColor: AlwaysStoppedAnimation(Colors.white),
+              strokeWidth: 8,
+              backgroundColor: MainColor.accentColor,
+            ),
+            Center(
+              child: Text(
+                '$sec',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 50,
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
+      : ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              padding: EdgeInsets.symmetric( horizontal: 32, vertical: 16)),
+            onPressed: () {
+              startTimer();
+              _clearBoard();
+            },
+            child: Text(
+                    'Play Again!',
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+              ),);
   }
 }

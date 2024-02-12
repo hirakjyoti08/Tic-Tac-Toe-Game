@@ -120,8 +120,8 @@ class _GameScreenState extends State<GameScreen> {
                             width: 5,
                           ),
                           color: matchedIndexes.contains(index)
-                                 ? MainColor.accentColor
-                                 :MainColor.secondaryColor,
+                              ? MainColor.accentColor
+                              : MainColor.secondaryColor,
                         ),
                         child: Center(
                           child: Text(
@@ -299,6 +299,8 @@ class _GameScreenState extends State<GameScreen> {
         displayXO[i] = '';
       }
       resultDec = '';
+      matchedIndexes.clear();
+      winnerFound = false;
     });
     filledBoxed = 0;
   }

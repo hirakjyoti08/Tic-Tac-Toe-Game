@@ -155,6 +155,19 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               ),
             ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              margin: EdgeInsets.only(bottom: 20),
+              child: Text(
+                "github.com/hirakjyoti08",
+                 style: GoogleFonts.salsa(
+                  textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  )
+              ),
+           ),
+            ),
           ],
         ),
       ),

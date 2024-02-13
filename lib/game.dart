@@ -160,13 +160,12 @@ class _GameScreenState extends State<GameScreen> {
               margin: EdgeInsets.only(bottom: 20),
               child: Text(
                 "github.com/hirakjyoti08",
-                 style: GoogleFonts.salsa(
-                  textStyle: TextStyle(
+                style: GoogleFonts.salsa(
+                    textStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
-                  )
+                )),
               ),
-           ),
             ),
           ],
         ),
@@ -293,6 +292,8 @@ class _GameScreenState extends State<GameScreen> {
     if (!winnerFound && filledBoxed == 9) {
       setState(() {
         resultDec = 'Nobody Wins XD !';
+        _clearBoard();
+        stopTimer();
       });
     }
   }

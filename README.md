@@ -43,6 +43,3 @@ This project uses the following dependencies:
 
 <img align="left" width="400" height="800" src="https://github.com/hirakjyoti08/Tic-Tac-Toe-game/assets/76906387/79cee5a3-627e-4414-bf66-13ef5ea18f4c">
 
-## Credits
-
-This project is created and maintained by [hirakjyoti08](https://github.com/hirakjyoti08).

@@ -35,10 +35,9 @@ This project uses the following dependencies:
 
 ## Screenshots
 
-
 ---
 
-<img align="left" width="400" height="800" src="https://github.com/hirakjyoti08/Tic-Tac-Toe-game/assets/76906387/b710fdf4-ab19-4550-87da-bee3889bd32a">
+<img align="left" width="400" height="800" src="https://github.com/hirakjyoti08/Tic-Tac-Toe-game/assets/76906387/f7901d96-3ea0-43cc-bfd0-9241bce9f9fe">
 
 <img align="left" width="400" height="800" src="https://github.com/hirakjyoti08/Tic-Tac-Toe-game/assets/76906387/79cee5a3-627e-4414-bf66-13ef5ea18f4c">
 
